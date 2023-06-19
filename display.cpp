@@ -1,6 +1,7 @@
 #include "display.h"
 #include "heltec.h"
 #include "logo.h"
+#include <ESP8266WiFi.h>
 
 
 void initDisplay() {
@@ -10,7 +11,7 @@ void initDisplay() {
 }
 
 void printNewMessage(String msg) {
-  Heltec.display->clear();
+  clearDisp();
   Heltec.display->drawString(0, 0, msg);
   Heltec.display->display();
 }
@@ -45,7 +46,7 @@ void displayLogo(String symbol) {
 }
 
 void show_symbol(const unsigned char*s, int w, int h) {
-  Heltec.display->drawXbm(90, 0, w, h, s);
+  Heltec.display->drawXbm(95, 0, w, h, s);
   Heltec.display->display();
 }
 
@@ -53,12 +54,18 @@ void show_symbol(const unsigned char*s, int w, int h) {
 void displayPrice(String price) {
   Heltec.display->setColor(BLACK);
   int w = price.length();
-  Heltec.display->fillRect(0, 5, w * 9, 30);
+  Heltec.display->fillRect(0, 0, w * 9, 16);
 
   // Redraw the updated number at the desired location
   Heltec.display->setColor(WHITE);
   Heltec.display->setFont(ArialMT_Plain_16);
-  Heltec.display->drawString(0, 5, price);
+  Heltec.display->drawString(0, 0, price);
+  Heltec.display->display();
+}
+
+void displayStatus() {
+  Heltec.display->drawXbm(0, 18, 15, 15, WIFI);
+  Heltec.display->drawString(20, 18, WiFi.SSID());
   Heltec.display->display();
 }
 

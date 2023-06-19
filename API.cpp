@@ -68,6 +68,9 @@ void printInfo(WebsocketsMessage message) {
   } else {
     String r = resp["p"].as<const char*>();
     float number = r.toFloat();
+    if (number == 0) {
+      return;
+    }
     displayPrice(String(number));
   }
 }

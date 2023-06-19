@@ -69,6 +69,7 @@ void setup() {
   /****************************************/
   initWS();
   connectWebSocket();
+  displayStatus();
   
 
 }
