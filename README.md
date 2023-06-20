@@ -47,7 +47,7 @@ pip3 install esptool
     2. Use the built-in HTTP API to change the config
 
         ```
-        curl http://192.168.4.22/api/rewrite_config?config=JSON_CONFIG
+        curl -X POST http://192.168.4.22/api/rewrite_config?config=JSON_CONFIG
         ```
         - Json structure for configuration
         ```json
