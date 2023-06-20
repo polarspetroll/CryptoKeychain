@@ -13,12 +13,12 @@ WebsocketsClient client;
 void Rewrite_Config(AsyncWebServerRequest *request) {
 
 
-  if (!request->hasArg("plain")) {
+  if (!request->hasArg("config")) {
     request->send_P(400, "application/json", "{\"error\":\"Empty Body\"}");
     return;
   }
 
-  String body = request->arg("plain");
+  String body = request->arg("config");
   DynamicJsonDocument doc(200);
   DeserializationError err = deserializeJson(doc, body);
   if (err) {
