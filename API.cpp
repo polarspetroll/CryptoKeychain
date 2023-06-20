@@ -32,7 +32,7 @@ void Rewrite_Config(AsyncWebServerRequest *request) {
     return;
   }
 
-  request->send_P(200, "application/json", "{\"error\":null");
+  request->send_P(200, "application/json", "{\"error\":null}");
 }
 
 
