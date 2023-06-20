@@ -46,7 +46,7 @@ void displayLogo(String symbol) {
 }
 
 void show_symbol(const unsigned char*s, int w, int h) {
-  Heltec.display->drawXbm(95, 0, w, h, s);
+  Heltec.display->drawXbm(87, 0, w, h, s);
   Heltec.display->display();
 }
 
