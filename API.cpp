@@ -8,6 +8,7 @@
 using namespace websockets;
 WebsocketsClient client;
 
+
 // Server API function
 void Rewrite_Config(AsyncWebServerRequest *request) {
 
@@ -27,9 +28,11 @@ void Rewrite_Config(AsyncWebServerRequest *request) {
 
 
   if (!write_config("config.json", body)) {
-    request->send_P(400, "application/json", "{\"error\":\"Invalid Json\"}");
+    request->send_P(400, "application/json", "{\"error\":\"Internal Server Error\"}");
     return;
   }
+
+  request->send_P(200, "application/json", "{\"error\":null");
 }
 
 
