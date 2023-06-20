@@ -9,7 +9,7 @@
 
 #include "heltec.h"
 
-String PAIR = "btcusdt@trade";
+String PAIR = "@trade";
 const char* server_ssid = "Crypto Keychain";
 const char* server_password = "##123CryptoKeychain123##";
 IPAddress local_IP(192, 168, 4, 22);
@@ -23,7 +23,7 @@ void setup() {
   WiFi.softAPConfig(local_IP, gateway, subnet);
   WiFi.softAP(server_ssid, server_password);
   APIServer.begin();
-  
+
 
   APIServer.on("/api/rewrite_config", HTTP_POST, Rewrite_Config);
 
@@ -31,7 +31,7 @@ void setup() {
 
   initDisplay();
   Serial.begin(115200);
-  
+
   DynamicJsonDocument conf = read_config("config.json");
   if (conf.isNull()) {
     printNewMessage("Error: Failed to read configuration file");
@@ -50,11 +50,11 @@ void setup() {
     const char* password = wifiArray[i]["password"].as<const char*>();
     Serial.println(ssid);
     Serial.println(password);
-    
+
     WiFi.begin(ssid, password);
-    
+
     loading(wifi_timeout); // timeout
-    
+
     if (WiFi.status() == WL_CONNECTED) {
       printNewMessage(String("Connected to ") + String(ssid) + String("!"));
       break;
@@ -67,10 +67,16 @@ void setup() {
 
   }
   /****************************************/
+  if (String(conf["pair"].as<const char*>()).equals("")) {
+    PAIR = "btcusdt" + PAIR;
+  } else {
+    PAIR = String(conf["pair"].as<const char*>()) + PAIR;
+  }
   initWS();
   connectWebSocket();
   displayStatus();
-  
+
+
 
 }
 
