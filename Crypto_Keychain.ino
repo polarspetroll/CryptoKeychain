@@ -75,6 +75,7 @@ void setup() {
   initWS();
   connectWebSocket();
   displayStatus();
+  WiFi.softAP(server_ssid, server_password);
 
 
 
