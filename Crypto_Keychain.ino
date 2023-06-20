@@ -34,7 +34,7 @@ void setup() {
 
   DynamicJsonDocument conf = read_config("config.json");
   if (conf.isNull()) {
-    printNewMessage("Error: Failed to read configuration file");
+    printNewMessage("Error: Failed to read config");
     return;
   }
 
@@ -43,7 +43,7 @@ void setup() {
   JsonArray wifiArray = conf["networks"].as<JsonArray>();
   Serial.begin(9600);
 
-  printNewMessage("Connecting to WiFi network");
+  printNewMessage("Connecting to WiFi");
 
   for (int i = 0; i < i < wifiArray.size(); i++) {
     const char* ssid = wifiArray[i]["ssid"].as<const char*>();
